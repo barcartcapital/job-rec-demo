@@ -9,6 +9,7 @@ import {
 import { Job } from "@/lib/types";
 import Badge from "@/components/Badge";
 import RecommendationPanel from "@/components/RecommendationPanel";
+import AnalyzeButton from "@/components/AnalyzeButton";
 
 export async function generateStaticParams() {
   const jobs = getJobs();
@@ -138,6 +139,43 @@ export default async function JobPage({ params }: JobPageProps) {
           otherRecIds={baseRecIds}
         />
       </div>
+
+      {/* LLM Judge */}
+      <AnalyzeButton
+        sourceJob={{
+          title: job.title,
+          company: job.company,
+          city: job.city,
+          country: job.country,
+          category: job.category,
+          jobType: job.jobType,
+          experience: job.experience,
+        }}
+        baselineRecs={baseRecs.map((r) => {
+          const j = recJobs.find((j) => j.id === r.id)!;
+          return {
+            title: j.title,
+            company: j.company,
+            city: j.city,
+            country: j.country,
+            category: j.category,
+            jobType: j.jobType,
+            experience: j.experience,
+          };
+        })}
+        enhancedRecs={wtdRecs.map((r) => {
+          const j = recJobs.find((j) => j.id === r.id)!;
+          return {
+            title: j.title,
+            company: j.company,
+            city: j.city,
+            country: j.country,
+            category: j.category,
+            jobType: j.jobType,
+            experience: j.experience,
+          };
+        })}
+      />
 
       {/* Legend */}
       <div className="bg-gray-50 rounded-lg border border-gray-200 p-4 text-sm text-gray-600">

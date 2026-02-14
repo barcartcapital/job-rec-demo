@@ -38,7 +38,7 @@ export default function RecommendationPanel({
               {isUnique && (
                 <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-yellow-400 rounded-r" title="Unique to this model" />
               )}
-              <JobCard job={job} score={rec.score} compact />
+              <JobCard job={job} compact />
             </div>
           );
         })}

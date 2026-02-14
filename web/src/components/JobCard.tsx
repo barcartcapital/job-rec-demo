@@ -4,29 +4,18 @@ import Badge from "./Badge";
 
 interface JobCardProps {
   job: Job;
-  score?: number;
   compact?: boolean;
 }
 
-export default function JobCard({ job, score, compact = false }: JobCardProps) {
+export default function JobCard({ job, compact = false }: JobCardProps) {
   const location = [job.city, job.state, job.country].filter(Boolean).join(", ");
 
   return (
     <Link href={`/jobs/${job.id}`}>
       <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all bg-white">
-        <div className="flex justify-between items-start gap-2">
-          <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-gray-900 truncate">{job.title}</h3>
-            <p className="text-sm text-gray-600 mt-0.5">{job.company}</p>
-          </div>
-          {score !== undefined && (
-            <div className="shrink-0 text-right">
-              <div className="text-xs text-gray-500">Match</div>
-              <div className="text-sm font-bold text-blue-600">
-                {(score * 100).toFixed(0)}%
-              </div>
-            </div>
-          )}
+        <div>
+          <h3 className="font-semibold text-gray-900 truncate">{job.title}</h3>
+          <p className="text-sm text-gray-600 mt-0.5">{job.company}</p>
         </div>
 
         <div className="mt-2 flex items-center gap-1.5 text-sm text-gray-500">
@@ -45,17 +34,6 @@ export default function JobCard({ job, score, compact = false }: JobCardProps) {
             {job.experience && job.experience !== "Not Specified" && (
               <Badge variant="purple">{job.experience}</Badge>
             )}
-          </div>
-        )}
-
-        {score !== undefined && (
-          <div className="mt-2.5">
-            <div className="w-full bg-gray-100 rounded-full h-1.5">
-              <div
-                className="bg-blue-500 h-1.5 rounded-full transition-all"
-                style={{ width: `${Math.min(score * 100, 100)}%` }}
-              />
-            </div>
           </div>
         )}
       </div>
